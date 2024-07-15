@@ -144,12 +144,15 @@ function generateQuestion() {
             ListOptions.appendChild(listItem);
         });
     } else {
-        let listItem = document.createElement("li");
         question.innerHTML='';
         ListOptions.innerHTML = '';
-        listItem.innerHTML = '';
         PlayerScore.innerHTML = ` Game is Over! your score is ${score}/${questions.length}`;
-
+        const newGame=document.createElement("button");
+        newGame.innerHTML="new Game";
+        ContainerScore.appendChild(newGame);
+        newGame.addEventListener("click",()=>{
+            location.reload();
+        });
     }
     counter++;
 }
@@ -169,7 +172,7 @@ function validateAnswer(selectedOption) {
 
 function countdown() {
     if (totalTime > 0 && counter < questions.length) {
-        timeLeft.textContent = totalTime;
+        timeLeft.textContent = `time left: ${totalTime} seconds`;
         totalTime--;
         setTimeout(countdown, 1000);
      } 
