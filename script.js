@@ -119,9 +119,9 @@ let questions = [
 function startGame(difficultyLevel){
     difficulty.innerHTML="";
     timeLeft.textContent=totalTime;
-    countdown();
     questions = questions.filter(question => question.difficulty === difficultyLevel);
     generateQuestion();
+    countdown();
 }
 easyLevel.addEventListener("click", () => {
     startGame("easy");
@@ -171,8 +171,8 @@ function validateAnswer(selectedOption) {
 }
 
 function countdown() {
-    if (totalTime > 0 && counter < questions.length) {
-        timeLeft.textContent = `time left: ${totalTime} seconds`;
+    if (totalTime > 0) {
+        timeLeft.innerHTML = `time left: ${totalTime} seconds`;
         totalTime--;
         setTimeout(countdown, 1000);
      } 
