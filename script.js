@@ -10,6 +10,8 @@ const timeLeft=document.getElementById("timeLeft");
 let totalTime=12;
 let counter = 0;
 let score = 0;
+let nbOfQuestions;
+const QuestionsLeft=document.getElementById("remaining-questions");
 // array of objects to store the questions.
 let questions = [
     {
@@ -120,6 +122,8 @@ function startGame(difficultyLevel){
     difficulty.innerHTML="";
     timeLeft.textContent=totalTime;
     questions = questions.filter(question => question.difficulty === difficultyLevel);
+    nbOfQuestions = questions.length;
+    QuestionsLeft.textContent = `Remaining Questions: ${nbOfQuestions}`;
     generateQuestion();
     countdown();
 }
@@ -168,10 +172,11 @@ function validateAnswer(selectedOption) {
         score++;
     }
     PlayerScore.textContent = `Score: ${score}/${questions.length}`;
+    QuestionsLeft.textContent = `Remaining Questions: ${nbOfQuestions - counter}`;
 }
 
 function countdown() {
-    if (totalTime > 0) {
+    if (totalTime > 0 && counter < questions.length) {
         timeLeft.innerHTML = `time left: ${totalTime} seconds`;
         totalTime--;
         setTimeout(countdown, 1000);
